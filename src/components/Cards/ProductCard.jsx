@@ -1,9 +1,11 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
   const {
+    _id,
     title,
     image,
     price,
@@ -12,7 +14,7 @@ const ProductCard = ({ product }) => {
     sold,
     ratings,
   } = product;
-
+console.log(_id);
   const discountedPrice = discount
     ? price - (price * discount) / 100
     : price;
@@ -55,17 +57,23 @@ const ProductCard = ({ product }) => {
               ৳{price}
             </span>
           )}
-          
+
         </div>
-           <div>
-            <button className="btn btn-primary w-full">Add to Cart</button>
+        <div>
+          <button className="btn btn-primary w-full">Add to Cart</button>
         </div>
-           <div>
-            <button className='btn btn-primary btn-outline w-full'>View Details</button>
+        <div>
+          <Link
+            href={`/product/${_id.toString()}`}
+            className="btn btn-primary btn-outline w-full"
+          >
+            View Details
+          </Link>
+
         </div>
-        
+
       </div>
-     
+
     </div>
   );
 };
