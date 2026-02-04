@@ -5,9 +5,9 @@ import { FaStar } from 'react-icons/fa';
 
 const ProductDetails = async ({ params }) => {
     const { id } = await params;
-    console.log(id);
+    // console.log(id);
     const product = await getSingleProduct(id);
-    console.log(product);
+    // console.log(product);
     const {
         title,
         image,
@@ -17,6 +17,7 @@ const ProductDetails = async ({ params }) => {
         reviews,
         sold,
         info,
+        qna,
         description,
     } = product;
 
@@ -73,26 +74,41 @@ const ProductDetails = async ({ params }) => {
                             </>
                         )}
                     </div>
-
                     {/* Buttons */}
-                    <div className="flex gap-4 pt-4">
-                        <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
-                            Add to Cart
-                        </button>
-                        {/* Description */}
-                        <div className="text-gray-700 leading-relaxed mt-8 space-y-4">
-                            {description?.split("/n/n").map((para, idx) => (
-                                <p key={idx}>{para}</p>
+                <div className="flex gap-4 pt-4">
+                    <button className=" btn btn-primary btn-wide transition">
+                        Add to Cart
+                    </button>
+
+                </div>
+            </div>
+            <div className='col-span-full'>
+                
+                    {/* Description */}
+                    <div className="text-gray-700 leading-relaxed mt-8 space-y-4">
+                        {description?.split("/n/n").map((para, idx) => (
+                            <p key={idx}>{para}</p>
+                        ))}
+                    </div>
+                    {/* key Features */}
+                    <div className='mt-6'>
+                        <h3 className='font-semibold mb-2'>key Features</h3>
+                        <ul>
+                            {info?.map((item, i) => (
+                                <li key={i}>{item}</li>
                             ))}
-                        </div>
-                        {/* key Features */}
-                        <div className='mt-6'>
-                            <h3 className='font-semibold mb-2'>key Features</h3>
-                            <ul>
-                                {info?.map((item, i) => (
-                                    <li key={i}>{item}</li>
-                                ))}
-                            </ul>
+                        </ul>
+                    </div>
+                    {/* QNA */}
+                    <div className='mt-8'>
+                        <h3 className='font-semibold mb-3'>Q & A</h3>
+                        <div className='space-y-3'>
+                            {qna?.map((item, i) => (
+                                <div key={i} className='border rounded-lg p-3'>
+                                    <p className='font-medium'>{item.qnestion}</p>
+                                    <p className='text-sm text-gray-600 mt-1'>{item.answer}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
